@@ -27,11 +27,12 @@ public class Simulation<T extends Comparable> {
             test_set.add(new ArrayList<>());
         }
 
-        for(int i=0;i<len;i++){
-            t = create_random(rand);
-            for(int j=0;j<sim_num;j++){
-                test_set.get(j).add(t);
-            }
+        for(int i=0;i<len*sim_num;i++){
+            t = (T) create_random(rand);
+            test_set.get(i/len).add(t);
+//            for(int j=0;j<sim_num;j++){
+//                test_set.get(j).add(t);
+//            }
         }
     }
     public double run(){
@@ -46,10 +47,11 @@ public class Simulation<T extends Comparable> {
                 } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e){
                     e.printStackTrace();
                 }
-                start = System.currentTimeMillis();
+                start = System.nanoTime();
                 algo.compute();
-                end = System.currentTimeMillis();
-                res_set.add(end-start);
+                end = System.nanoTime();
+                System.out.println((end-start)/1000000);
+                res_set.add((end-start)/1000000);
             }
             double sum=0;
             for (int i = 0; i < sim_num; i++) {
@@ -57,7 +59,7 @@ public class Simulation<T extends Comparable> {
             }
             run_done = true;
             System.out.println(test_correctness());
-            return sum/sim_num;
+            return sum/((double)sim_num);
         } else {
             return -1;
         }
@@ -75,12 +77,16 @@ public class Simulation<T extends Comparable> {
     }
     private boolean test_correctness(){
         if(run_done){
-            for(int i=0;i<sim_num-1;i++) {
-                for (int j = 0; j < len; j++) {
-                    if (test_set.get(i).get(j) != test_set.get(i+1).get(j))
-                        return false;
-                }
+            for (int i = 0; i < len-1; i++) {
+                if (test_set.get(0).get(i).compareTo(test_set.get(0).get(i+1)) >= 1)
+                    return false;
             }
+//            for(int i=0;i<sim_num-1;i++) {
+//                for (int j = 0; j < len; j++) {
+//                    if (test_set.get(i).get(j) != test_set.get(i+1).get(j))
+//                        return false;
+//                }
+//            }
             return true;
         } else {
             return false;

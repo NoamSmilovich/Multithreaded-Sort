@@ -8,6 +8,7 @@ public class Simple_Profiler {
     private static Thread t1;
     public Simple_Profiler() {
         memory_before_program_starts = Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
+//        this.memory_before_program_starts = memory_before_program_starts;
         t1 = new Thread(this::start);
         t1.start();
     }
@@ -22,7 +23,7 @@ public class Simple_Profiler {
             max_active_threads = Math.max(max_active_threads, threads_active);
             max_memory_usage_by_jvm = Math.max(max_memory_usage_by_jvm, cur_memory_usage_by_jvm);
             try {
-                TimeUnit.MILLISECONDS.sleep(10);
+                TimeUnit.MILLISECONDS.sleep(5);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

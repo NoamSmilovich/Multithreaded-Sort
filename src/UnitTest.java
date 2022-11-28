@@ -23,7 +23,6 @@ public class UnitTest {
             testEmpty(thresholds[i]);
         }
     }
-    @Test
     void testAlreadySorted(int th) {
         Integer[] A = {-32, -32, 32, 32, 32, 32, 32, 32, 34};
         test_list = Arrays.asList(A);
@@ -32,7 +31,6 @@ public class UnitTest {
         boolean t = isSorted(test_list);
         assertEquals(true, t);
     }
-    @Test
     void testUnsorted(int th) {
         Integer[] B = {32, 32, 34, 33};
         test_list = Arrays.asList(B);
@@ -41,7 +39,6 @@ public class UnitTest {
         boolean t = isSorted(test_list);
         assertEquals(true, t);
     }
-    @Test
     void testSingleElement(int th) {
         Integer[] C = {32};
         test_list = Arrays.asList(C);
@@ -50,7 +47,6 @@ public class UnitTest {
         boolean t = isSorted(test_list);
         assertEquals(true, t);
     }
-    @Test
     void testEmpty(int th){
         Integer[] D = {};
         test_list = Arrays.asList(D);
