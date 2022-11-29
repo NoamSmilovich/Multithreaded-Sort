@@ -1,5 +1,3 @@
-import org.junit.jupiter.api.Test;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +11,6 @@ public class UnitTest {
     public UnitTest(Multithreaded_Sort algo){
         this.algo = algo;
     }
-    @Test
     void testAll(){
         int[] thresholds = {0, 1, 2, 5, 20};
         for (int i=0;i<thresholds.length;i++) {

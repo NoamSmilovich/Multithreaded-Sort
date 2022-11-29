@@ -17,22 +17,16 @@ public class Simulation<T extends Comparable> {
         this.algo = algo;
         this.threshold = threshold;
         this.run_done = false;
-
         Random rand = new Random();
         rand.setSeed(System.currentTimeMillis());
         T t;
         test_set= new ArrayList<>();
-
         for(int i=0;i<sim_num;i++){
             test_set.add(new ArrayList<>());
         }
-
         for(int i=0;i<len*sim_num;i++){
-            t = (T) create_random(rand);
+            t = (T) create_random(rand, true);
             test_set.get(i/len).add(t);
-//            for(int j=0;j<sim_num;j++){
-//                test_set.get(j).add(t);
-//            }
         }
     }
     public double run(){
@@ -59,18 +53,24 @@ public class Simulation<T extends Comparable> {
             }
             run_done = true;
             System.out.println(test_correctness());
+//            System.out.println(test_set.get(0));
             return sum/((double)sim_num);
         } else {
             return -1;
         }
     }
-    private T create_random(Random r){
+    private T create_random(Random r) {
+        return create_random(r, false);
+    }
+    private T create_random(Random r, boolean is_gaussian){
+        if(is_gaussian && this.getClass().getComponentType() == Double.class)
+            return (T) (Double) (r.nextGaussian()*r.nextInt());
         if(this.getClass().getComponentType() == Integer.class)
             return (T) (Integer) r.nextInt();
         if(this.getClass().getComponentType() == Float.class)
-            return (T) (Float) r.nextFloat();
+            return (T) (Float) (r.nextFloat()*r.nextInt());
         if(this.getClass().getComponentType() == Double.class)
-            return (T) (Double) r.nextDouble();
+            return (T) (Double) (r.nextDouble()*r.nextInt());
         if(this.getClass().getComponentType() == Long.class)
             return (T) (Long) r.nextLong();
         return (T)(Integer) r.nextInt();
