@@ -6,21 +6,23 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        UnitTest test = new UnitTest(new Sort_MS<Integer>());
-        test.testAll();
+        UnitTest ms_test = new UnitTest(new Sort_MS<Integer>());
+        ms_test.testAll();
+        UnitTest qs_test = new UnitTest(new Sort_MS<Integer>());
+        qs_test.testAll();
 
-        int points = 40;
-        double[] res = new double[points];
-        int [] lens = new int[points];
-        long [] sss = new long[points];
-        Simulation<Integer> s;
-        for(int i=0;i<points;i++){
-            lens[i] = 10000*i;
-            s = new Simulation<>(10, 10000*i, 100, new Sort_QS());
-            res[i] = s.run();
-        }
-        String[] header2 = {"List Length", "Execution Time (ms)", "Memory Used (kb)"};
-        writeDataToCsv(header2, lens, res, sss, points);
+//        int points = 40;
+//        double[] res = new double[points];
+//        int [] lens = new int[points];
+//        long [] sss = new long[points];
+//        Simulation<Integer> s;
+//        for(int i=0;i<points;i++){
+//            lens[i] = 10000*i;
+//            s = new Simulation<>(10, 10000*i, 100, new Sort_MS());
+//            res[i] = s.run();
+//        }
+//        String[] header2 = {"List Length", "Execution Time (ms)", "Memory Used (kb)"};
+//        writeDataToCsv(header2, lens, res, sss, points);
 
 //        double[] resArr = {0, 0, 0, 0};
 //        Simulation<Integer> s1 = new Simulation<>(1, 1000000, 100000000, new Sort_QS());
@@ -34,8 +36,8 @@ public class Main {
 //
 //        System.out.println(resArr);
 
-        if(false) {
-            Simulation<Double> it;
+        if(true) {
+            Simulation<Integer> it;
             int len = 22000;
             int sims_per_res = 6;
             int sims_per_graph = 40;

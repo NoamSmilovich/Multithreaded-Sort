@@ -53,7 +53,6 @@ public class Simulation<T extends Comparable> {
             }
             run_done = true;
             System.out.println(test_correctness());
-//            System.out.println(test_set.get(0));
             return sum/((double)sim_num);
         } else {
             return -1;
